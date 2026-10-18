@@ -1,0 +1,1135 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <title>Eagle SG Ventures</title>
+  <meta name="description" content="Creamos tu marca propia de belleza y skincare, desde el concepto hasta la primera venta.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap">
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────── */
+    :root {
+      --bg:           #F8F6F2;
+      --bg-alt:       #F1EDE6;
+      --fg:           #1A1A18;
+      --fg-inv:       #F8F6F2;
+      --muted:        #6B6860;
+      --accent:       #C4873A;
+      --accent-light: #F0E0C8;
+      --divider:      #DDD9D2;
+      --card:         #FFFFFF;
+      --header-bg:    #1A1A18;
+
+      --font-display: 'Playfair Display', Georgia, serif;
+      --font-body:    'DM Sans', system-ui, -apple-system, sans-serif;
+
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --bg:           #141412;
+        --bg-alt:       #1A1A16;
+        --fg:           #EDE9E3;
+        --fg-inv:       #141412;
+        --muted:        #8A8780;
+        --accent:       #D49A50;
+        --accent-light: #2A2218;
+        --divider:      #2A2A26;
+        --card:         #1E1E1A;
+        --header-bg:    #0E0E0C;
+        color-scheme: dark;
+      }
+    }
+    :root[data-theme="dark"] {
+      --bg:           #141412;
+      --bg-alt:       #1A1A16;
+      --fg:           #EDE9E3;
+      --fg-inv:       #141412;
+      --muted:        #8A8780;
+      --accent:       #D49A50;
+      --accent-light: #2A2218;
+      --divider:      #2A2A26;
+      --card:         #1E1E1A;
+      --header-bg:    #0E0E0C;
+      color-scheme: dark;
+    }
+
+    /* ─── RESET ──────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--fg);
+      font-family: var(--font-body);
+      font-weight: 300;
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    img { max-width: 100%; display: block; }
+
+    /* ─── NAV ────────────────────────────────────────────── */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(26,26,24,0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+
+    .nav-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 18px max(24px, env(safe-area-inset-left, 0px));
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-icon {
+      width: 28px;
+      height: 28px;
+      color: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .nav-name {
+      font-family: var(--font-body);
+      font-weight: 500;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: #F8F6F2;
+      opacity: 0.9;
+    }
+
+    .nav-cta {
+      font-size: 12px;
+      font-weight: 500;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      padding: 8px 20px;
+      border: 1px solid rgba(196,135,58,0.4);
+      border-radius: 2px;
+      transition: background 0.2s, color 0.2s;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: var(--accent);
+      color: #fff;
+      border-color: var(--accent);
+    }
+
+    /* ─── HERO ───────────────────────────────────────────── */
+    .hero {
+      background: var(--header-bg);
+      padding-top: max(120px, calc(80px + env(safe-area-inset-top, 0px)));
+      padding-bottom: 96px;
+      padding-left: max(24px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle texture lines */
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image: repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 119px,
+        rgba(255,255,255,0.025) 120px
+      );
+      pointer-events: none;
+    }
+
+    .hero-inner {
+      max-width: 860px;
+      margin: 0 auto;
+      position: relative;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 32px;
+    }
+
+    .eyebrow-line {
+      width: 32px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .eyebrow-text {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    .hero-headline {
+      font-family: var(--font-display);
+      font-size: clamp(32px, 6vw, 60px);
+      font-weight: 700;
+      line-height: 1.12;
+      color: #F8F6F2;
+      text-wrap: balance;
+      margin-bottom: 28px;
+    }
+
+    .hero-headline em {
+      color: var(--accent);
+      font-style: normal;
+    }
+
+    .hero-sub {
+      font-size: clamp(16px, 2.2vw, 19px);
+      font-weight: 300;
+      color: rgba(248,246,242,0.62);
+      max-width: 580px;
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      align-items: center;
+    }
+
+    .btn-primary {
+      display: inline-block;
+      background: var(--accent);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      padding: 16px 36px;
+      border-radius: 2px;
+      transition: opacity 0.2s, transform 0.15s;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-ghost {
+      display: inline-block;
+      color: rgba(248,246,242,0.55);
+      font-size: 13px;
+      font-weight: 400;
+      text-decoration: none;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(248,246,242,0.2);
+      transition: color 0.2s, border-color 0.2s;
+    }
+
+    .btn-ghost:hover { color: #F8F6F2; border-color: rgba(248,246,242,0.5); }
+
+    .hero-stats {
+      margin-top: 72px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1px;
+      background: rgba(255,255,255,0.07);
+      border-radius: 2px;
+      overflow: hidden;
+    }
+
+    .stat {
+      background: rgba(255,255,255,0.03);
+      padding: 28px 24px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 3.5vw, 36px);
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+
+    .stat-label {
+      font-size: 12px;
+      color: rgba(248,246,242,0.45);
+      letter-spacing: 0.06em;
+      line-height: 1.4;
+    }
+
+    /* ─── SECTIONS SHARED ────────────────────────────────── */
+    section {
+      padding-block: 88px;
+      padding-left: max(24px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+
+    .section-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-label::before {
+      content: "";
+      width: 20px;
+      height: 1px;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    .section-heading {
+      font-family: var(--font-display);
+      font-size: clamp(26px, 4vw, 40px);
+      font-weight: 700;
+      line-height: 1.18;
+      text-wrap: balance;
+      margin-bottom: 20px;
+    }
+
+    .section-body {
+      font-size: 17px;
+      color: var(--muted);
+      max-width: 620px;
+      line-height: 1.75;
+    }
+
+    /* ─── PROBLEMA ───────────────────────────────────────── */
+    .problema {
+      background: var(--bg);
+    }
+
+    .problema-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 64px;
+      align-items: center;
+      margin-top: 52px;
+    }
+
+    @media (max-width: 680px) {
+      .problema-grid { grid-template-columns: 1fr; gap: 40px; }
+    }
+
+    .problema-text p {
+      font-size: 17px;
+      line-height: 1.8;
+      color: var(--fg);
+      margin-bottom: 20px;
+    }
+
+    .problema-text p:last-child { margin-bottom: 0; }
+
+    .problema-pain {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pain-item {
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 20px;
+      background: var(--card);
+      border: 1px solid var(--divider);
+      border-radius: 2px;
+    }
+
+    .pain-icon {
+      font-size: 20px;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .pain-text {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    .pain-text strong {
+      display: block;
+      color: var(--fg);
+      font-weight: 500;
+      margin-bottom: 3px;
+    }
+
+    /* ─── PARA QUIÉN ─────────────────────────────────────── */
+    .paraquien {
+      background: var(--bg-alt);
+    }
+
+    .audience-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+      margin-top: 52px;
+    }
+
+    @media (max-width: 560px) {
+      .audience-grid { grid-template-columns: 1fr; }
+    }
+
+    .audience-card {
+      background: var(--card);
+      border: 1px solid var(--divider);
+      border-radius: 2px;
+      padding: 28px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .audience-card::after {
+      content: "";
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0;
+      height: 2px;
+      background: var(--accent);
+      transition: width 0.4s ease;
+    }
+
+    .audience-card:hover::after { width: 100%; }
+
+    .audience-icon {
+      font-size: 28px;
+      margin-bottom: 14px;
+      line-height: 1;
+    }
+
+    .audience-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+
+    .audience-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── FASES ──────────────────────────────────────────── */
+    .fases {
+      background: var(--bg);
+    }
+
+    .fases-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    @media (max-width: 640px) {
+      .fases-grid { grid-template-columns: 1fr; }
+    }
+
+    .fase-card {
+      background: var(--card);
+      border: 1px solid var(--divider);
+      border-radius: 2px;
+      padding: 36px 32px 32px;
+      position: relative;
+    }
+
+    .fase-card--primary {
+      border-top: 3px solid var(--accent);
+    }
+
+    .fase-num {
+      font-family: var(--font-display);
+      font-size: 52px;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      opacity: 0.18;
+      position: absolute;
+      top: 20px;
+      right: 28px;
+    }
+
+    .fase-badge {
+      display: inline-block;
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      background: var(--accent-light);
+      padding: 4px 10px;
+      border-radius: 2px;
+      margin-bottom: 18px;
+    }
+
+    .fase-title {
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
+      color: var(--fg);
+      margin-bottom: 16px;
+    }
+
+    .fase-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.7;
+      margin-bottom: 28px;
+    }
+
+    .fase-price {
+      font-size: 24px;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 6px;
+    }
+
+    .fase-price-note {
+      font-size: 12px;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 16px;
+    }
+
+    .fase-highlight {
+      font-size: 12px;
+      color: var(--accent);
+      font-weight: 400;
+      letter-spacing: 0.02em;
+      padding-top: 16px;
+      border-top: 1px solid var(--divider);
+    }
+
+    /* ─── ENTREGABLES ────────────────────────────────────── */
+    .entregables {
+      background: var(--bg-alt);
+    }
+
+    .entregables-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      gap: 14px;
+      margin-top: 52px;
+    }
+
+    .entregable-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px;
+      background: var(--card);
+      border: 1px solid var(--divider);
+      border-radius: 2px;
+    }
+
+    .entregable-num {
+      font-family: var(--font-display);
+      font-size: 26px;
+      font-weight: 600;
+      color: var(--accent);
+      line-height: 1;
+      min-width: 28px;
+      opacity: 0.7;
+    }
+
+    .entregable-text {
+      font-size: 13px;
+      color: var(--fg);
+      line-height: 1.45;
+      padding-top: 5px;
+    }
+
+    /* ─── DIFERENCIADORES ────────────────────────────────── */
+    .diferenciadores {
+      background: var(--bg);
+    }
+
+    .dif-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 28px;
+      margin-top: 52px;
+    }
+
+    @media (max-width: 640px) {
+      .dif-grid { grid-template-columns: 1fr; }
+    }
+
+    .dif-item {
+      padding: 28px;
+      border-left: 2px solid var(--accent-light);
+      transition: border-color 0.25s;
+    }
+
+    .dif-item:hover { border-color: var(--accent); }
+
+    .dif-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 8px;
+    }
+
+    .dif-desc {
+      font-size: 14px;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    /* ─── PROCESO ────────────────────────────────────────── */
+    .proceso {
+      background: var(--bg-alt);
+    }
+
+    .proceso-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+      margin-top: 52px;
+      position: relative;
+    }
+
+    .proceso-steps::before {
+      content: "";
+      position: absolute;
+      left: 19px;
+      top: 0;
+      bottom: 0;
+      width: 1px;
+      background: var(--divider);
+    }
+
+    .step {
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      padding: 24px 0;
+      position: relative;
+    }
+
+    .step-dot {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background: var(--card);
+      border: 2px solid var(--divider);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: border-color 0.25s, background 0.25s;
+    }
+
+    .step:hover .step-dot {
+      border-color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    .step-num {
+      font-family: var(--font-display);
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    .step-body { padding-top: 8px; }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 500;
+      color: var(--fg);
+      margin-bottom: 4px;
+    }
+
+    .step-desc {
+      font-size: 13px;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ─── CTA ────────────────────────────────────────────── */
+    .cta-section {
+      background: var(--header-bg);
+      padding-left: max(24px, env(safe-area-inset-left, 0px));
+      padding-right: max(24px, env(safe-area-inset-right, 0px));
+    }
+
+    .cta-inner {
+      max-width: 700px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .cta-eyebrow {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 24px;
+    }
+
+    .cta-headline {
+      font-family: var(--font-display);
+      font-size: clamp(24px, 4.5vw, 40px);
+      font-weight: 700;
+      color: #F8F6F2;
+      line-height: 1.18;
+      text-wrap: balance;
+      margin-bottom: 16px;
+    }
+
+    .cta-sub {
+      font-size: 16px;
+      color: rgba(248,246,242,0.5);
+      line-height: 1.7;
+      margin-bottom: 48px;
+    }
+
+    .cta-contact {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      margin-top: 40px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(255,255,255,0.08);
+      width: 100%;
+    }
+
+    .cta-contact-name {
+      font-size: 16px;
+      font-weight: 500;
+      color: rgba(248,246,242,0.9);
+    }
+
+    .cta-contact-role {
+      font-size: 13px;
+      color: rgba(248,246,242,0.35);
+      letter-spacing: 0.04em;
+    }
+
+    .cta-email {
+      font-size: 15px;
+      color: var(--accent);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      margin-top: 4px;
+      user-select: all;
+      transition: opacity 0.2s;
+    }
+
+    .cta-email:hover { opacity: 0.75; }
+
+    .cta-location {
+      font-size: 12px;
+      color: rgba(248,246,242,0.28);
+      margin-top: 10px;
+      letter-spacing: 0.06em;
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────── */
+    footer {
+      background: #0E0E0C;
+      padding: 32px max(24px, env(safe-area-inset-left, 0px));
+      text-align: center;
+    }
+
+    .footer-inner {
+      max-width: 1000px;
+      margin: 0 auto;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .footer-icon {
+      width: 20px;
+      height: 20px;
+      color: var(--accent);
+      opacity: 0.6;
+    }
+
+    .footer-name {
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: rgba(248,246,242,0.3);
+    }
+
+    .footer-copy {
+      font-size: 11px;
+      color: rgba(248,246,242,0.2);
+      letter-spacing: 0.04em;
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────── */
+    @media (max-width: 480px) {
+      .hero-stats { grid-template-columns: 1fr; }
+      .nav-cta { display: none; }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ── NAV ───────────────────────────────────────────────── -->
+  <nav class="nav" aria-label="Navegación principal">
+    <div class="nav-inner">
+      <a href="#" class="nav-brand" aria-label="Eagle SG Ventures">
+        <svg class="nav-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18 4C18 4 8 10 8 20C8 26 12.5 30 18 30C23.5 30 28 26 28 20C28 10 18 4 18 4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M18 4L12 16H18L14 28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 4L24 16H18L22 28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <circle cx="18" cy="18" r="2" fill="currentColor" opacity="0.6"/>
+        </svg>
+        <span class="nav-name">Eagle SG Ventures</span>
+      </a>
+      <a href="#contacto" class="nav-cta">Agendar llamada</a>
+    </div>
+  </nav>
+
+  <!-- ── HERO ──────────────────────────────────────────────── -->
+  <header class="hero" id="inicio">
+    <div class="hero-inner">
+
+      <div class="hero-eyebrow">
+        <span class="eyebrow-line" aria-hidden="true"></span>
+        <span class="eyebrow-text">Consultoría de lanzamiento de marca</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Tienes la visión.<br>
+        Nosotros la convertimos<br>
+        en un <em>negocio que perdura.</em>
+      </h1>
+
+      <p class="hero-sub">
+        Creamos tu marca propia de belleza y skincare — desde el concepto hasta la primera venta — como tus socios estratégicos y operativos.
+      </p>
+
+      <div class="hero-actions">
+        <a href="#contacto" class="btn-primary">Agendar una llamada</a>
+        <a href="#como-trabajamos" class="btn-ghost">Ver cómo trabajamos →</a>
+      </div>
+
+      <div class="hero-stats" role="list" aria-label="Cifras clave">
+        <div class="stat" role="listitem">
+          <div class="stat-num">7</div>
+          <div class="stat-label">entregables<br>garantizados</div>
+        </div>
+        <div class="stat" role="listitem">
+          <div class="stat-num">360°</div>
+          <div class="stat-label">cobertura desde<br>marca hasta venta</div>
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+  <!-- ── PROBLEMA ──────────────────────────────────────────── -->
+  <section class="problema" id="problema">
+    <div class="section-inner">
+      <p class="section-label">El desafío real</p>
+      <h2 class="section-heading">La oportunidad existe.<br>El problema es ejecutarla.</h2>
+
+      <div class="problema-grid">
+        <div class="problema-text">
+          <p>
+            Construir una audiencia, un negocio o una reputación es una habilidad extraordinaria. Pero convertir eso en una línea de productos propia — con marca, fabricación, logística, finanzas y canales — es un mundo completamente diferente.
+          </p>
+          <p>
+            El problema no es la falta de oportunidad. Es la falta de un socio que sepa ejecutar.
+          </p>
+        </div>
+
+        <div class="problema-pain" role="list" aria-label="Obstáculos comunes">
+          <div class="pain-item" role="listitem">
+            <div class="pain-icon" aria-hidden="true">⚙️</div>
+            <div class="pain-text">
+              <strong>Complejidad operativa</strong>
+              Proveedores, regulaciones, logística, inventario — demasiadas piezas móviles sin experiencia previa.
+            </div>
+          </div>
+          <div class="pain-item" role="listitem">
+            <div class="pain-icon" aria-hidden="true">🗺️</div>
+            <div class="pain-text">
+              <strong>Sin hoja de ruta clara</strong>
+              El mercado de belleza tiene sus propias reglas. Entrar sin estrategia es costoso y lento.
+            </div>
+          </div>
+          <div class="pain-item" role="listitem">
+            <div class="pain-icon" aria-hidden="true">🤝</div>
+            <div class="pain-text">
+              <strong>Socios equivocados</strong>
+              Agencias que cobran por horas, no por resultados. Consultores sin skin in the game.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PARA QUIÉN ─────────────────────────────────────────── -->
+  <section class="paraquien" id="para-quien">
+    <div class="section-inner">
+      <p class="section-label">Para quién trabajamos</p>
+      <h2 class="section-heading">Cualquiera con visión<br>y determinación para construir.</h2>
+      <p class="section-body">Trabajamos con emprendedores, empresas, creadores y figuras públicas que quieren lanzar su propia línea de belleza, skincare o cuidado personal.</p>
+
+      <div class="audience-grid" role="list">
+        <div class="audience-card" role="listitem">
+          <div class="audience-icon" aria-hidden="true">🎤</div>
+          <div class="audience-title">Artistas e influencers</div>
+          <div class="audience-desc">Con audiencia construida y listas para monetizarla con un producto propio que refleje su marca personal.</div>
+        </div>
+        <div class="audience-card" role="listitem">
+          <div class="audience-icon" aria-hidden="true">🏢</div>
+          <div class="audience-desc audience-title">Empresas y marcas</div>
+          <div class="audience-desc">Que quieren extender su portafolio hacia categorías de belleza o cuidado personal con una línea propia.</div>
+        </div>
+        <div class="audience-card" role="listitem">
+          <div class="audience-icon" aria-hidden="true">💡</div>
+          <div class="audience-title">Emprendedores</div>
+          <div class="audience-desc">Con una visión clara y el capital para ejecutarla, que necesitan un socio experto para estructurarla bien desde el inicio.</div>
+        </div>
+        <div class="audience-card" role="listitem">
+          <div class="audience-icon" aria-hidden="true">🌟</div>
+          <div class="audience-title">Figuras públicas</div>
+          <div class="audience-desc">Políticos, deportistas, conductores o personalidades con comunidad y reputación que quieren traducirla en negocio.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FASES ──────────────────────────────────────────────── -->
+  <section class="fases" id="como-trabajamos">
+    <div class="section-inner">
+      <p class="section-label">Cómo trabajamos</p>
+      <h2 class="section-heading">Dos etapas. Una sola dirección:<br>construir algo que dure.</h2>
+      <p class="section-body">Primero diseñamos la arquitectura completa. Luego la ejecutamos juntos.</p>
+
+      <div class="fases-grid" role="list">
+        <div class="fase-card fase-card--primary" role="listitem">
+          <div class="fase-num" aria-hidden="true">01</div>
+          <div class="fase-badge">Etapa 01</div>
+          <div class="fase-title">Diseño del negocio</div>
+          <div class="fase-desc">
+            Construimos la arquitectura completa del negocio: marca, producto, proveedores, finanzas, canales y plan de ejecución. Al final tienes un blueprint total — no un estudio, no una presentación: un plan listo para operar. Tú decides si tiene sentido construirlo.
+          </div>
+          <div class="fase-highlight">Los entregables son tuyos, sin importar qué decidas después.</div>
+        </div>
+
+        <div class="fase-card" role="listitem">
+          <div class="fase-num" aria-hidden="true">02</div>
+          <div class="fase-badge">Etapa 02</div>
+          <div class="fase-title">Construcción y operación</div>
+          <div class="fase-desc">
+            Si el diseño da luz verde, armamos y operamos el negocio juntos. Coordinamos agencias, proveedores y equipo bajo un modelo lean. Tú eres la marca. Nosotros somos la dirección general que lo hace funcionar.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── ENTREGABLES ────────────────────────────────────────── -->
+  <section class="entregables" id="entregables">
+    <div class="section-inner">
+      <p class="section-label">Lo que recibes</p>
+      <h2 class="section-heading">7 entregables del anteproyecto.</h2>
+      <p class="section-body">Cada entregable es tuyo. Los desarrollamos con tu participación activa, y te los entregamos sin restricciones al finalizar la fase.</p>
+
+      <div class="entregables-grid" role="list" aria-label="Lista de entregables">
+        <div class="entregable-item" role="listitem">
+          <div class="entregable-num" aria-hidden="true">1</div>
+          <div class="entregable-text">Análisis de oportunidad de mercado</div>
+        </div>
+        <div class="entregable-item" role="listitem">
+          <div class="entregable-num" aria-hidden="true">2</div>
+          <div class="entregable-text">Propuesta de marca — concepto, espacio y valores</div>
+        </div>
+        <div class="entregable-item" role="listitem">
+          <div class="entregable-num" aria-hidden="true">3</div>
+          <div class="entregable-text">Propuesta de producto</div>
+        </div>
+        <div class="entregable-item" role="listitem">
+          <div class="entregable-num" aria-hidden="true">4</div>
+          <div class="entregable-text">Mapa de proveedores — fabricantes y logística</div>
+        </div>
+        <div class="entregable-item" role="listitem">
+          <div class="entregable-num" aria-hidden="true">5</div>
+          <div class="entregable-text">Mapa de canales y propuesta de ventas</div>
+        </div>
+        <div class="entregable-item" role="listitem">
+          <div class="entregable-num" aria-hidden="true">6</div>
+          <div class="entregable-text">Plan financiero completo</div>
+        </div>
+        <div class="entregable-item" role="listitem">
+          <div class="entregable-num" aria-hidden="true">7</div>
+          <div class="entregable-text">Plan de ejecución</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── DIFERENCIADORES ───────────────────────────────────── -->
+  <section class="diferenciadores" id="por-que">
+    <div class="section-inner">
+      <p class="section-label">Por qué Eagle SG</p>
+      <h2 class="section-heading">Somos socios, no consultores.</h2>
+      <p class="section-body">La diferencia no está en lo que prometemos. Está en cómo estructuramos la relación.</p>
+
+      <div class="dif-grid" role="list">
+        <div class="dif-item" role="listitem">
+          <div class="dif-title">Décadas de ejecución real</div>
+          <div class="dif-desc">No experiencia teórica. Conocemos la industria de cuidado personal y belleza desde adentro — su cadena de suministro, sus márgenes, sus tiempos reales.</div>
+        </div>
+        <div class="dif-item" role="listitem">
+          <div class="dif-title">Modelo lean</div>
+          <div class="dif-desc">Coordinamos un ecosistema de expertos especializados sin inflar la estructura. Tú pagas por lo que necesitas, cuando lo necesitas.</div>
+        </div>
+        <div class="dif-item" role="listitem">
+          <div class="dif-title">Skin in the game</div>
+          <div class="dif-desc">Nuestros intereses están alineados con los tuyos desde el primer día. El último pago del anteproyecto se convierte en capital — apostamos junto contigo.</div>
+        </div>
+        <div class="dif-item" role="listitem">
+          <div class="dif-title">Proceso probado en campo</div>
+          <div class="dif-desc">Actualmente en ejecución con una artista mexicana. No vendemos una metodología hipotética — la estamos corriendo ahora mismo.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── PROCESO ────────────────────────────────────────────── -->
+  <section class="proceso" id="proceso">
+    <div class="section-inner">
+      <p class="section-label">El proceso</p>
+      <h2 class="section-heading">De la primera conversación<br>a la primera venta.</h2>
+
+      <div class="proceso-steps" role="list">
+        <div class="step" role="listitem">
+          <div class="step-dot" aria-hidden="true"><span class="step-num">1</span></div>
+          <div class="step-body">
+            <div class="step-title">Primera llamada — sin costo</div>
+            <div class="step-desc">Escuchamos tu visión. Te decimos con honestidad si tiene sentido construirla y cómo lo haríamos.</div>
+          </div>
+        </div>
+        <div class="step" role="listitem">
+          <div class="step-dot" aria-hidden="true"><span class="step-num">2</span></div>
+          <div class="step-body">
+            <div class="step-title">Propuesta formal</div>
+            <div class="step-desc">Si hay fit, te presentamos una propuesta detallada con alcance, cronograma y condiciones claras.</div>
+          </div>
+        </div>
+        <div class="step" role="listitem">
+          <div class="step-dot" aria-hidden="true"><span class="step-num">3</span></div>
+          <div class="step-body">
+            <div class="step-title">Diseño del negocio</div>
+            <div class="step-desc">Construimos la arquitectura completa: marca, producto, proveedores, canales, finanzas y plan de ejecución. Los entregables son tuyos.</div>
+          </div>
+        </div>
+        <div class="step" role="listitem">
+          <div class="step-dot" aria-hidden="true"><span class="step-num">4</span></div>
+          <div class="step-body">
+            <div class="step-title">Decisión informada</div>
+            <div class="step-desc">Con los 7 entregables en mano, decides si avanzar. Sin presión — los entregables son tuyos en cualquier caso.</div>
+          </div>
+        </div>
+        <div class="step" role="listitem">
+          <div class="step-dot" aria-hidden="true"><span class="step-num">5</span></div>
+          <div class="step-body">
+            <div class="step-title">Operación — primer lanzamiento</div>
+            <div class="step-desc">Construimos y operamos el negocio juntos, desde la producción hasta la primera venta.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ────────────────────────────────────────────────── -->
+  <section class="cta-section" id="contacto">
+    <div class="cta-inner">
+      <p class="cta-eyebrow">Dar el primer paso</p>
+      <h2 class="cta-headline">La primera conversación no cuesta nada. La segunda puede cambiar el rumbo de tu negocio.</h2>
+      <p class="cta-sub">Cuéntanos tu visión. En 30 minutos te decimos cómo la construiríamos juntos.</p>
+
+      <a href="mailto:hola@eaglesgventures.com?subject=Me%20interesa%20lanzar%20mi%20marca%20de%20belleza&body=Hola%2C%0A%0AMe%20interesa%20saber%20m%C3%A1s%20sobre%20Eagle%20SG%20Ventures%20y%20c%C3%B3mo%20podr%C3%ADamos%20trabajar%20juntos.%0A%0ASobre%20mi%20proyecto%3A%0A" class="btn-primary">Agendar una llamada →</a>
+
+      <div class="cta-contact">
+        <div class="cta-contact-role">O escríbenos directamente</div>
+        <a href="mailto:hola@eaglesgventures.com" class="cta-email">hola@eaglesgventures.com</a>
+        <div class="cta-location">📍 Ciudad de México, México</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <svg class="footer-icon" viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+          <path d="M18 4C18 4 8 10 8 20C8 26 12.5 30 18 30C23.5 30 28 26 28 20C28 10 18 4 18 4Z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/>
+          <path d="M18 4L12 16H18L14 28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M18 4L24 16H18L22 28" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        <span class="footer-name">Eagle SG Ventures</span>
+      </div>
+      <div class="footer-copy">© 2026 Eagle SG Ventures</div>
+    </div>
+  </footer>
+
+</body>
+</html>
